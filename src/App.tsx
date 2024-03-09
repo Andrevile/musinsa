@@ -1,190 +1,198 @@
-import { css, Global } from '@emotion/react';
+import PageLayout from '@components/PageLayout';
+import { css, Global, ThemeProvider } from '@emotion/react';
+
+const theme = {
+  colors: {
+    bgColor: '#FFFFFF',
+    lightGray: '#F9F9F9',
+    heavyGray: '#F1F1F1',
+  },
+};
 
 export default function App() {
   return (
-    <>
-      <Global
-        styles={css`
-          ${reset}
-        `}
-      />
-      <div
-        css={css`
-          padding: 32px;
-          background-color: hotpink;
-          border-radius: 4px;
-          &:hover {
-          }
-        `}
-      >
-        Hover to change color.
-      </div>
-    </>
+    <ThemeProvider theme={theme}>
+      <Global styles={reset} />
+      <PageLayout></PageLayout>
+    </ThemeProvider>
   );
 }
 
-const reset = `body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+const reset = css`
+  body {
+    margin: 0;
+    font-family: Apple SD Gothic Neo;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-  background-color: #f7f7fc;
-}
-ol,
-ul {
-  list-style: none;
-}
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section {
+    display: block;
+  }
+  body {
+    line-height: 1;
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow: hidden;
+    // -ms-overflow-style: none;
+  }
+  // ::-webkit-scrollbar {
+  //   display: none;
+  // }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+  ol,
+  ul {
+    list-style: none;
+  }
 
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #cccccc;
-  margin: 1em 0;
-  padding: 0;
-}
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
 
-a {
-  margin: 0;
-  padding: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-}
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #cccccc;
+    margin: 1em 0;
+    padding: 0;
+  }
 
-nav ul {
-  list-style: none;
-}
+  a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
 
-* {
-  box-sizing: border-box;
-}
+  nav ul {
+    list-style: none;
+  }
 
-button,
-input {
-  border: none;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-input {
-  outline: none;
-}
+  button,
+  input {
+    border: none;
+  }
 
-button {
-  cursor: pointer;
-}
+  input {
+    outline: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
 `;
