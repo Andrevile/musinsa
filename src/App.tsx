@@ -1,5 +1,6 @@
-import PageLayout from '@components/PageLayout';
+import PageLayout from '@components/common/PageLayout';
 import { css, Global, ThemeProvider } from '@emotion/react';
+import MainPage from '@pages/MainPage';
 
 const theme = {
   colors: {
@@ -13,7 +14,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Global styles={reset} />
-      <PageLayout></PageLayout>
+      <PageLayout>
+        <MainPage />
+      </PageLayout>
     </ThemeProvider>
   );
 }
