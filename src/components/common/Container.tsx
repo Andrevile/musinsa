@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { HTMLAttributes, ReactNode } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  childrend?: ReactNode;
+  children?: ReactNode;
 }
 
 export function Container({ children, ...rest }: Props) {

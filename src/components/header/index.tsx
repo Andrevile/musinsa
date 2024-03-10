@@ -1,25 +1,21 @@
 import { Container } from '@components/common/Container';
-import { css, useTheme } from '@emotion/react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { Logo } from './Logo';
+import { AppBar } from './AppBar';
+import Filter from './Filter';
 
 export default function Header() {
-  const theme = useTheme();
-
   return (
     <Head>
+      <AppBar />
+      <Filter />
       <Container
         css={css`
-          background: ${theme.colors.bgColor};
-          height: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          height: 10px;
+          background: #f1f1f1;
         `}
-      >
-        <Logo />
-      </Container>
+      />
     </Head>
   );
 }
@@ -30,6 +26,6 @@ const Head = styled.header`
   transform: translate(-50%, 0);
   width: 100%;
   min-width: 95px;
-  background: #f1f1f1;
+  background: #ffffff;
   padding-bottom: 10px;
 `;

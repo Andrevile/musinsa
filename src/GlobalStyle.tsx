@@ -118,12 +118,7 @@ const reset = css`
     line-height: 1;
     background-color: #f5f5f5;
     height: 100vh;
-    overflow: hidden;
-    // -ms-overflow-style: none;
   }
-  // ::-webkit-scrollbar {
-  //   display: none;
-  // }
 
   ol,
   ul {

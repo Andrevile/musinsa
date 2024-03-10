@@ -1,4 +1,25 @@
-export function Logo({ width = 94.89, height = 16 }: { width?: number; height?: number }) {
+import { Container } from '@components/common/Container';
+import { css, useTheme } from '@emotion/react';
+
+export function AppBar() {
+  const theme = useTheme();
+
+  return (
+    <Container
+      css={css`
+        background: ${theme.colors.bgColor};
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `}
+    >
+      <Logo />
+    </Container>
+  );
+}
+
+function Logo({ width = 94.89, height = 16 }: { width?: number; height?: number }) {
   return (
     <svg width={width} height={height} viewBox='0 0 300 51' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
