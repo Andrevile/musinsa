@@ -1,8 +1,10 @@
-import { SVGProps } from 'react';
+interface IconProps {
+  size?: number;
+}
 
-export const SearchIcon: React.FC<SVGProps<SVGSVGElement>> = () => {
+export function SearchIcon({ size = 18 }: IconProps) {
   return (
-    <svg width='18' height='19' viewBox='0 0 18 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg width={size} height={size} viewBox='0 0 18 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
         fillRule='evenodd'
         clipRule='evenodd'
@@ -28,4 +30,4 @@ export const SearchIcon: React.FC<SVGProps<SVGSVGElement>> = () => {
       <g mask='url(#mask0_4729_377)'></g>
     </svg>
   );
-};
+}

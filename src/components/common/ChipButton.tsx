@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { HTMLAttributes, ReactNode, SVGProps } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {
   primary?: boolean;
-  icon?: React.FC<SVGProps<SVGSVGElement>>;
+  icon?: ReactNode | JSX.Element;
   children?: ReactNode;
 }
 
@@ -44,7 +44,7 @@ export function ChipButton({ primary = false, icon: Icon, children, ...rest }: P
             margin-left: 3px;
           `}
         >
-          <Icon />
+          {Icon}
         </span>
       )}
     </button>

@@ -7,5 +7,8 @@ declare module '@emotion/react' {
       lightGray: string;
       heavyGray: string;
     };
+    fontWeight: {
+      regular: string;
+    };
   }
 }

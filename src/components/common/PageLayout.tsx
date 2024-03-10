@@ -1,5 +1,5 @@
-import Header from '@components/header';
 import styled from '@emotion/styled';
+import Header from 'components/header';
 
 export default function PageLayout({ children }: { children?: React.ReactNode }) {
   return (

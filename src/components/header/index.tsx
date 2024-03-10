@@ -1,15 +1,17 @@
-import { Container } from '@components/common/Container';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Container } from 'components/common/Container';
 
 import { AppBar } from './AppBar';
 import Filter from './Filter';
+import { Search } from './Search';
 
 export default function Header() {
   return (
     <Head>
       <AppBar />
       <Filter />
+      <Search />
       <Container
         css={css`
           height: 10px;

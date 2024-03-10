@@ -15,11 +15,12 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"]
+      "components/*": ["./src/components/*"],
+      "pages/*": ["./src/pages/*"],
+      "types/*": ["./src/types/*"]
     },
     "types": ["node", "@emotion/react/types/css-prop"]
   },
-  "include": ["src"],
+  "include": ["src", "@types/emotions.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -23,5 +23,5 @@ export const Primary: Story = {
   args: { children: '텍스트', primary: true },
 };
 export const WithIcon: Story = {
-  args: { children: '텍스트', icon: SearchIcon },
+  args: { children: '텍스트', icon: SearchIcon({}) },
 };
