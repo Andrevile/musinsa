@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
-import { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-export function Container({ children, ...rest }: Props) {
+export const Container = forwardRef<HTMLDivElement, Props>(({ children, ...rest }, ref) => {
   return (
     <div
+      ref={ref}
       {...rest}
       css={css`
         max-width: 100%;
@@ -20,4 +21,6 @@ export function Container({ children, ...rest }: Props) {
       {children}
     </div>
   );
-}
+});
+
+Container.displayName = 'Container';

@@ -36,7 +36,7 @@ export default function Filter() {
         <ChipButton>단독상품</ChipButton>
         <ChipButton>품절포함</ChipButton>
       </Container>
-      <Container
+      {/* <Container
         css={css`
           height: 55px;
           padding: 10px 7px;
@@ -53,7 +53,7 @@ export default function Filter() {
         {filterList.map((item) => (
           <Tag key={item.id} item={item} />
         ))}
-      </Container>
+      </Container> */}
     </>
   );
 }

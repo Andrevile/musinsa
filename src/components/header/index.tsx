@@ -11,18 +11,19 @@ export default function Header() {
     <Head>
       <AppBar />
       <Filter />
-      <Search />
+      {/* <Search />
       <Container
         css={css`
           height: 10px;
           background: #f1f1f1;
         `}
-      />
+      /> */}
     </Head>
   );
 }
 
 const Head = styled.header`
+  z-index: 1;
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);

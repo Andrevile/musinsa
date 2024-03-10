@@ -17,10 +17,12 @@
     "paths": {
       "components/*": ["./src/components/*"],
       "pages/*": ["./src/pages/*"],
-      "types/*": ["./src/types/*"]
+      "types/*": ["./src/types/*"],
+      "constants/*": ["./src/constants/*"],
+      "utils/*": ["./src/utils/*"]
     },
     "types": ["node", "@emotion/react/types/css-prop"]
   },
-  "include": ["src", "@types/emotions.d.ts"],
+  "include": ["src", "src/types/emotions.d.ts"],
   "exclude": ["node_modules"]
 }

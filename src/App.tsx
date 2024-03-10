@@ -4,14 +4,17 @@ import MainPage from 'pages/MainPage';
 
 import { GlobalStyle } from './GlobalStyle';
 
-const theme = {
+export const theme = {
   colors: {
     bgColor: '#FFFFFF',
     lightGray: '#F9F9F9',
     heavyGray: '#F1F1F1',
+    red: '#FF0000',
   },
   fontWeight: {
     regular: '400',
+    regularBold: '500',
+    heavy: '700',
   },
 };
 
