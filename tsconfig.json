@@ -19,7 +19,8 @@
       "pages/*": ["./src/pages/*"],
       "types/*": ["./src/types/*"],
       "constants/*": ["./src/constants/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "hooks/*": ["./src/hooks/*"]
     },
     "types": ["node", "@emotion/react/types/css-prop"]
   },

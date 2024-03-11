@@ -11,13 +11,13 @@ export default function Header() {
     <Head>
       <AppBar />
       <Filter />
-      {/* <Search />
+      {/* <Search /> */}
       <Container
         css={css`
           height: 10px;
           background: #f1f1f1;
         `}
-      /> */}
+      />
     </Head>
   );
 }
@@ -30,5 +30,4 @@ const Head = styled.header`
   width: 100%;
   min-width: 95px;
   background: #ffffff;
-  padding-bottom: 10px;
 `;

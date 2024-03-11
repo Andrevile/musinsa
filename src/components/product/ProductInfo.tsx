@@ -119,6 +119,7 @@ function ExClusive() {
   return (
     <span
       css={css`
+        z-index: 1;
         position: absolute;
         top: -13px;
         display: inline-block;
