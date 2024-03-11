@@ -33,6 +33,7 @@ export function Tag({ item, closable = true, onClose, ...rest }: Props) {
         <span
           onClick={() => onClose?.(item.id)}
           css={css`
+            cursor: pointer;
             position: relative;
             top: 2px;
             margin-left: 4px;

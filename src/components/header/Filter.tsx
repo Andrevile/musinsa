@@ -1,24 +1,28 @@
 import { css } from '@emotion/react';
 import { ChipButton } from 'components/common/ChipButton';
 import { Container } from 'components/common/Container';
+import { RefreshIcon } from 'components/common/icons/RefreshIcon';
 import { SearchIcon } from 'components/common/icons/SearchIcon';
 import { Tag } from 'components/common/Tag';
-import { useState } from 'react';
-import { FilterItemType } from 'types/filter';
+import { FILTER_OPTIONS } from 'constants/filter';
+import { useFilter } from 'hooks/common/useFilter';
+import { FilterOptionType } from 'types/filter';
 
-export default function Filter() {
-  const [filterList] = useState<FilterItemType[]>([
-    { id: '아이템1', text: '아이템1' },
-    { id: '아이템2', text: '아이템2' },
-    { id: '아이템3', text: '아이템3' },
-    { id: '아이템4', text: '아이템4' },
-    { id: '아이템5', text: '아이템5' },
-  ]);
+interface Props {
+  filterList: FilterOptionType[];
+  handleFilterList: (filterList: FilterOptionType[]) => void;
+}
+
+export default function Filter({ filterList, handleFilterList }: Props) {
+  const { toggleFilter, resetFilter } = useFilter({ filterList, setFilterList: handleFilterList });
+
+  const selectedFilter = new Set(filterList);
 
   return (
     <>
       <Container
         css={css`
+          position: interit;
           height: 55px;
           padding: 10px 7px;
           display: inline-flex;
@@ -32,28 +36,54 @@ export default function Filter() {
         `}
       >
         <ChipButton icon={<SearchIcon />}>검색</ChipButton>
-        <ChipButton>세일상품</ChipButton>
-        <ChipButton>단독상품</ChipButton>
-        <ChipButton>품절포함</ChipButton>
-      </Container>
-      {/* <Container
-        css={css`
-          height: 55px;
-          padding: 10px 7px;
-          display: inline-flex;
-          flex-wrap: nowrap;
-          gap: 5px;
-          overflow-x: scroll;
-
-          ::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      >
-        {filterList.map((item) => (
-          <Tag key={item.id} item={item} />
+        {Object.entries(FILTER_OPTIONS).map(([id, value]) => (
+          <ChipButton
+            key={id}
+            onToggle={() => toggleFilter(id as FilterOptionType)}
+            highlight={selectedFilter.has(id as FilterOptionType)}
+          >
+            {value}
+          </ChipButton>
         ))}
-      </Container> */}
+      </Container>
+      {!!filterList.length && (
+        <Container
+          css={css`
+            position: relative;
+            height: 50px;
+            padding: 12px 15px;
+          `}
+        >
+          <Container
+            css={css`
+              overflow-x: scroll;
+              display: inline-flex;
+              flex-wrap: nowrap;
+              gap: 5px;
+              ::-webkit-scrollbar {
+                display: none;
+              }
+            `}
+          >
+            {filterList.map((item) => (
+              <Tag key={item} item={{ id: item, text: FILTER_OPTIONS[item] }} onClose={() => toggleFilter(item)} />
+            ))}
+            <button
+              onClick={resetFilter}
+              css={css`
+                background: #ffffff;
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                right: 0;
+                top: 0;
+              `}
+            >
+              <RefreshIcon />
+            </button>
+          </Container>
+        </Container>
+      )}
     </>
   );
 }

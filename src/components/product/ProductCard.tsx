@@ -14,6 +14,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export const ProductCard = forwardRef<HTMLDivElement, Props>(({ product, children, ...rest }, ref) => {
   const { goodsName, imageUrl, brandName, brandLinkUrl, price, normalPrice, isSale, saleRate, isExclusive, isSoldOut } =
     product;
+
   return (
     <Container
       ref={ref}

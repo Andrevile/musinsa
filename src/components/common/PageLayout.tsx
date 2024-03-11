@@ -1,13 +1,7 @@
 import styled from '@emotion/styled';
-import Header from 'components/header';
 
 export default function PageLayout({ children }: { children?: React.ReactNode }) {
-  return (
-    <Page>
-      <Header />
-      {children}
-    </Page>
-  );
+  return <Page>{children}</Page>;
 }
 
 const Page = styled.div`
