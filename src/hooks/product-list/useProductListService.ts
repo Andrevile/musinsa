@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FilterOptionType } from 'types/filter';
 import { ProductType } from 'types/product';
 import { getProductList } from 'utils/apis';
 
@@ -7,7 +6,7 @@ import { useFetching } from '../common/useFetching';
 import { useIntersect } from '../common/useIntersect';
 
 interface Params {
-  filterList: FilterOptionType[];
+  filterList: string[];
 }
 
 export const useProductListService = ({ filterList }: Params) => {

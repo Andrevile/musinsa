@@ -2,18 +2,19 @@ import { css } from '@emotion/react';
 import { ChipButton } from 'components/common/ChipButton';
 import { Container } from 'components/common/Container';
 import { RefreshIcon } from 'components/common/icons/RefreshIcon';
-import { SearchIcon } from 'components/common/icons/SearchIcon';
 import { Tag } from 'components/common/Tag';
 import { FILTER_OPTIONS } from 'constants/filter';
 import { useFilter } from 'hooks/common/useFilter';
+import { ReactNode } from 'react';
 import { FilterOptionType } from 'types/filter';
 
 interface Props {
-  filterList: FilterOptionType[];
-  handleFilterList: (filterList: FilterOptionType[]) => void;
+  filterList: string[];
+  handleFilterList: (filterList: string[]) => void;
+  children?: ReactNode;
 }
 
-export default function Filter({ filterList, handleFilterList }: Props) {
+export default function Filter({ filterList, handleFilterList, children }: Props) {
   const { toggleFilter, resetFilter } = useFilter({ filterList, setFilterList: handleFilterList });
 
   const selectedFilter = new Set(filterList);
@@ -35,13 +36,9 @@ export default function Filter({ filterList, handleFilterList }: Props) {
           }
         `}
       >
-        <ChipButton icon={<SearchIcon />}>검색</ChipButton>
+        {children}
         {Object.entries(FILTER_OPTIONS).map(([id, value]) => (
-          <ChipButton
-            key={id}
-            onToggle={() => toggleFilter(id as FilterOptionType)}
-            highlight={selectedFilter.has(id as FilterOptionType)}
-          >
+          <ChipButton key={id} onToggle={() => toggleFilter(id)} highlight={selectedFilter.has(id)}>
             {value}
           </ChipButton>
         ))}
@@ -66,7 +63,11 @@ export default function Filter({ filterList, handleFilterList }: Props) {
             `}
           >
             {filterList.map((item) => (
-              <Tag key={item} item={{ id: item, text: FILTER_OPTIONS[item] }} onClose={() => toggleFilter(item)} />
+              <Tag
+                key={item}
+                item={{ id: item, text: FILTER_OPTIONS[item as FilterOptionType] }}
+                onClose={() => toggleFilter(item)}
+              />
             ))}
             <button
               onClick={resetFilter}

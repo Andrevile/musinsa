@@ -1,15 +1,12 @@
-import { useEffect } from 'react';
-import { FilterOptionType } from 'types/filter';
-
 interface Params {
-  filterList: FilterOptionType[];
-  setFilterList: (list: FilterOptionType[]) => void;
+  filterList: string[];
+  setFilterList: (list: string[]) => void;
 }
 
 export const useFilter = ({ filterList, setFilterList }: Params) => {
   const filterSet = new Set(filterList);
 
-  const toggleFilter = (filter: FilterOptionType) => {
+  const toggleFilter = (filter: string) => {
     const isExist = filterSet.has(filter);
 
     if (!isExist) {
