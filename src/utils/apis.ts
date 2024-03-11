@@ -32,6 +32,6 @@ export const getProductList = async ({
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(http.get(url));
-    }, 1000);
+    }, 750);
   });
 };

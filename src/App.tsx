@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import PageLayout from 'components/common/PageLayout';
-import MainPage from 'pages/MainPage';
+import ProductListPage from 'pages/ProductListPage';
 
 import { GlobalStyle } from './GlobalStyle';
 
@@ -23,7 +23,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <PageLayout>
-        <MainPage />
+        <ProductListPage />
       </PageLayout>
     </ThemeProvider>
   );

@@ -11,9 +11,7 @@ export const useFetching = <T>(
   const deps = Array.isArray(queryKey) ? queryKey : [queryKey];
 
   useEffect(() => {
-    if (!data) {
-      setIsLoading(true);
-    }
+    setIsLoading(true);
 
     callback()
       .then((data) => {

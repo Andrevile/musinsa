@@ -14,6 +14,7 @@ module.exports = {
       constants: path.resolve(__dirname, '../src/constants'),
       utils: path.resolve(__dirname, '../src/utils'),
       hooks: path.resolve(__dirname, '../src/hooks'),
+      static: path.resolve(__dirname, '../src/static'),
     },
   },
 
@@ -27,6 +28,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|jpeg|png|gif|ico)$/,
+        type: 'asset/resource',
         generator: {
           filename: 'static/[name][ext]',
         },
