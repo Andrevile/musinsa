@@ -24,7 +24,7 @@ export function Tag({ item, closable = true, onClose, ...rest }: Props) {
         font-size: 12px;
         font-weight: 400;
         line-height: 1.5;
-        padding: 4px 8px;
+        padding: 4.5px 10px 3.5px 8px;
       `}
       {...rest}
     >
