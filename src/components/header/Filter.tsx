@@ -65,7 +65,7 @@ export default function Filter({ filterList, handleFilterList, children }: Props
             {filterList.map((item) => (
               <Tag
                 key={item}
-                item={{ id: item, text: FILTER_OPTIONS[item as FilterOptionType] }}
+                item={{ id: item, text: FILTER_OPTIONS[item as FilterOptionType] ?? item }}
                 onClose={() => toggleFilter(item)}
               />
             ))}

@@ -1,9 +1,17 @@
 import { css, useTheme } from '@emotion/react';
 import { Container } from 'components/common/Container';
 import { SearchIcon } from 'components/common/icons/SearchIcon';
-import { forwardRef } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 
-export const Search = forwardRef<HTMLInputElement>((_, ref) => {
+interface Props {
+  error?: boolean;
+  keyword: string | null;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSearch?: () => void;
+  onBlur?: () => void;
+}
+
+export const Search = forwardRef<HTMLInputElement, Props>(({ error, keyword, onChange, onSearch, onBlur }, ref) => {
   const theme = useTheme();
 
   return (
@@ -21,6 +29,7 @@ export const Search = forwardRef<HTMLInputElement>((_, ref) => {
           width: 100%;
           height: 40px;
           padding: 8px 10px;
+          margin-bottom: 2px;
         `}
       >
         <span
@@ -32,6 +41,14 @@ export const Search = forwardRef<HTMLInputElement>((_, ref) => {
         </span>
         <input
           ref={ref}
+          value={keyword ?? ''}
+          onChange={onChange}
+          onBlur={onBlur}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+              onSearch?.();
+            }
+          }}
           placeholder='상품명 검색'
           css={css`
             &::placeholder {
@@ -43,6 +60,17 @@ export const Search = forwardRef<HTMLInputElement>((_, ref) => {
           `}
         />
       </Container>
+      {error && (
+        <span
+          css={css`
+            padding-left: 1px;
+            color: red;
+            font-size: 12px;
+          `}
+        >
+          이미 존재하는 검색어 입니다.
+        </span>
+      )}
     </Container>
   );
 });

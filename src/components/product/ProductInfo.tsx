@@ -54,6 +54,7 @@ function Name({ productName }: { productName: string }) {
   return (
     <p
       css={css`
+        height: 36px;
         font-weight: ${theme.fontWeight.heavy};
         font-size: 14px;
         line-height: 1.285;

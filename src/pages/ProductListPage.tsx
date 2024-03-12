@@ -4,6 +4,7 @@ import { Container } from 'components/common/Container';
 import { SearchIcon } from 'components/common/icons/SearchIcon';
 import { LoadingSpinner } from 'components/common/LoadingSpinner';
 import PageLayout from 'components/common/PageLayout';
+import { useFilterContext } from 'components/context/FilterContextProvider';
 import Header from 'components/header';
 import { ProductCard } from 'components/product/ProductCard';
 import { ProductGrid } from 'components/product/ProductGrid';
@@ -12,15 +13,27 @@ import { useProductListService } from 'hooks/product-list/useProductListService'
 import { useState } from 'react';
 
 export default function ProductListPage() {
+  const { searchModeOnOff, toggleSearchMode } = useFilterContext();
   const [queryList, setQueryList] = useState<string[]>([]);
   const { targetRef, isLoading, filteredProductList } = useProductListService({ filterList: queryList });
-  const { searchModeOnOff, toggleSearchMode, isIncludeKeyword } = useSearch();
-
-  const paddingTop = queryList.length ? '165px' : '115px';
+  const {
+    error,
+    keyword,
+    inputRef,
+    // searchModeOnOff,
+    // toggleSearchMode,
+    isIncludeKeyword,
+    handleChangeSearchInput,
+    onBlur,
+    onSearch,
+    setIsError,
+  } = useSearch();
 
   const handleQueryList = (filterList: string[]) => {
     setQueryList(filterList);
   };
+
+  const paddingTop = queryList.length ? '165px' : '115px';
 
   return (
     <PageLayout>
@@ -36,7 +49,26 @@ export default function ProductListPage() {
             검색
           </ChipButton>
         </Header.Filter>
-        {searchModeOnOff && <Header.Search />}
+        {searchModeOnOff && (
+          <Header.Search
+            ref={inputRef}
+            error={error}
+            keyword={keyword}
+            onBlur={onBlur}
+            onSearch={() => {
+              if (keyword && keyword.length) {
+                const isExistSearchKeyWord = queryList.includes(keyword);
+                if (isExistSearchKeyWord) {
+                  setIsError(true);
+                  return;
+                }
+                setQueryList([...queryList, keyword]);
+                onSearch();
+              }
+            }}
+            onChange={handleChangeSearchInput}
+          />
+        )}
       </Header>
       <main
         css={css`

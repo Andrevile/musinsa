@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const useSearch = () => {
-  //   const [keyword, setKeyword] = useState<string>('');
+  const [error, setIsError] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [keyword, setKeyword] = useState<string | null>(null);
   const [searchModeOnOff, setIsSearchModeOnOff] = useState<boolean>(false);
 
   const toggleSearchMode = () => {
@@ -19,9 +21,37 @@ export const useSearch = () => {
     return !!filteredQueryList.length;
   };
 
+  const handleChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
+
+  const onBlur = () => {
+    setIsSearchModeOnOff(false);
+  };
+
+  const onSearch = () => {
+    setKeyword(null);
+  };
+
+  useEffect(() => {
+    if (searchModeOnOff) {
+      inputRef.current?.focus();
+    } else {
+      setIsError(false);
+      setKeyword(null);
+    }
+  }, [searchModeOnOff]);
+
   return {
+    error,
+    keyword,
+    inputRef,
     searchModeOnOff,
     toggleSearchMode,
     isIncludeKeyword,
+    handleChangeSearchInput,
+    setIsError,
+    onBlur,
+    onSearch,
   };
 };
