@@ -1,6 +1,8 @@
+import { useFilterWithSearchContext } from 'components/context/FilterWithSearchProvider';
 import { useEffect, useRef, useState } from 'react';
 
 export const useSearch = () => {
+  const { filterList, handleFilterList } = useFilterWithSearchContext();
   const [error, setIsError] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [keyword, setKeyword] = useState<string | null>(null);
@@ -26,6 +28,7 @@ export const useSearch = () => {
   };
 
   const onSearch = () => {
+    setIsError(false);
     setKeyword(null);
   };
 
@@ -43,6 +46,7 @@ export const useSearch = () => {
   }, [searchModeOnOff]);
 
   return {
+    filterList,
     error,
     keyword,
     inputRef,
@@ -53,5 +57,6 @@ export const useSearch = () => {
     setIsError,
     onSearch,
     onBlur,
+    handleFilterList,
   };
 };

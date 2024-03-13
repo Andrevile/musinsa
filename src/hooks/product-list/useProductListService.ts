@@ -8,7 +8,7 @@ import { useFetching } from '../common/useFetching';
 import { useIntersect } from '../common/useIntersect';
 
 export const useProductListService = () => {
-  const { filterList, handleFilterList } = useFilterWithSearchContext();
+  const { filterList } = useFilterWithSearchContext();
   const [page, setPage] = useState<number>(0);
   const [productList, setProductList] = useState<ProductType[]>([]);
   const [filteredProductList, setFilteredProductList] = useState<ProductType[]>([]);
@@ -77,6 +77,5 @@ export const useProductListService = () => {
     isLoading,
     targetRef,
     filteredProductList,
-    handleFilterList,
   };
 };
