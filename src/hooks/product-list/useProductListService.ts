@@ -59,7 +59,9 @@ export const useProductListService = () => {
 
     searchKeywordList.forEach((keyword) => {
       const regex = getKeywordRegex(keyword);
-      filteredProductList = filteredProductList.filter((product) => regex.test(product.goodsName));
+      filteredProductList = filteredProductList.filter(
+        (product) => regex.test(product.goodsName) || regex.test(product.brandName),
+      );
     });
 
     return filteredProductList;
