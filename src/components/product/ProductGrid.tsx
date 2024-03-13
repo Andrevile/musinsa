@@ -10,13 +10,17 @@ interface Props {
 
 export const ProductGrid = ({ itemList, renderItem }: Props) => {
   return (
-    <Container
-      css={css`
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      `}
-    >
-      {itemList.map((item, index) => renderItem(item, index))}
+    <Container>
+      <ul
+        css={css`
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        `}
+      >
+        {itemList.map((item, index) => (
+          <li key={item.goodsNo}>{renderItem(item, index)}</li>
+        ))}
+      </ul>
     </Container>
   );
 };

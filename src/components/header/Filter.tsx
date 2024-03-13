@@ -49,25 +49,28 @@ export default function Filter({ searchSection }: Props) {
             padding: 12px 15px;
           `}
         >
-          <Container
-            css={css`
-              width: calc(100% - 35px);
-              overflow-x: scroll;
-              display: inline-flex;
-              flex-wrap: nowrap;
-              gap: 5px;
-              ::-webkit-scrollbar {
-                display: none;
-              }
-            `}
-          >
-            {filterList.map((item) => (
-              <Tag
-                key={item}
-                item={{ id: item, text: FILTER_OPTIONS[item as FilterOptionType] ?? item }}
-                onClose={() => toggleFilter(item)}
-              />
-            ))}
+          <Container>
+            <ul
+              css={css`
+                width: calc(100% - 35px);
+                overflow-x: scroll;
+                display: inline-flex;
+                flex-wrap: nowrap;
+                gap: 5px;
+                ::-webkit-scrollbar {
+                  display: none;
+                }
+              `}
+            >
+              {filterList.map((item) => (
+                <li key={item}>
+                  <Tag
+                    item={{ id: item, text: FILTER_OPTIONS[item as FilterOptionType] ?? item }}
+                    onClose={() => toggleFilter(item)}
+                  />
+                </li>
+              ))}
+            </ul>
             <button
               onClick={resetFilter}
               css={css`
