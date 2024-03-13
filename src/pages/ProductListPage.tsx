@@ -18,8 +18,6 @@ export default function ProductListPage() {
     handleChangeSearchInput,
     onSearch,
     onBlur,
-    setIsError,
-    handleFilterList,
   } = useSearch();
 
   const paddingTop = filterList.length ? '165px' : '115px';
@@ -45,17 +43,7 @@ export default function ProductListPage() {
             ref={inputRef}
             error={error}
             keyword={keyword}
-            onSearch={() => {
-              if (keyword && keyword.length) {
-                const isExistSearchKeyWord = filterList.includes(keyword);
-                if (isExistSearchKeyWord) {
-                  setIsError(true);
-                  return;
-                }
-                handleFilterList([...filterList, keyword]);
-                onSearch();
-              }
-            }}
+            onSearch={onSearch}
             onChange={handleChangeSearchInput}
           />
         )}

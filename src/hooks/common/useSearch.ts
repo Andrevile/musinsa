@@ -28,8 +28,16 @@ export const useSearch = () => {
   };
 
   const onSearch = () => {
-    setIsError(false);
-    setKeyword(null);
+    if (keyword && keyword.length) {
+      const isExistSearchKeyWord = filterList.includes(keyword);
+      if (isExistSearchKeyWord) {
+        setIsError(true);
+        return;
+      }
+      handleFilterList([...filterList, keyword]);
+      setIsError(false);
+      setKeyword(null);
+    }
   };
 
   const onBlur = () => {
@@ -54,9 +62,7 @@ export const useSearch = () => {
     toggleSearchMode,
     isIncludeKeyword,
     handleChangeSearchInput,
-    setIsError,
     onSearch,
     onBlur,
-    handleFilterList,
   };
 };
