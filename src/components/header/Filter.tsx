@@ -3,18 +3,18 @@ import { ChipButton } from 'components/common/ChipButton';
 import { Container } from 'components/common/Container';
 import { RefreshIcon } from 'components/common/icons/RefreshIcon';
 import { Tag } from 'components/common/Tag';
+import { useFilterWithSearchContext } from 'components/context/FilterWithSearchProvider';
 import { FILTER_OPTIONS } from 'constants/filter';
 import { useFilter } from 'hooks/common/useFilter';
 import { ReactNode } from 'react';
 import { FilterOptionType } from 'types/filter';
 
 interface Props {
-  filterList: string[];
-  handleFilterList: (filterList: string[]) => void;
   children?: ReactNode;
 }
 
-export default function Filter({ filterList, handleFilterList, children }: Props) {
+export default function Filter({ children }: Props) {
+  const { filterList, handleFilterList } = useFilterWithSearchContext();
   const { toggleFilter, resetFilter } = useFilter({ filterList, setFilterList: handleFilterList });
 
   const selectedFilter = new Set(filterList);
@@ -53,6 +53,7 @@ export default function Filter({ filterList, handleFilterList, children }: Props
         >
           <Container
             css={css`
+              width: calc(100% - 35px);
               overflow-x: scroll;
               display: inline-flex;
               flex-wrap: nowrap;

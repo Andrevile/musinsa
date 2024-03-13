@@ -1,15 +1,14 @@
+import { useFilterWithSearchContext } from 'components/context/FilterWithSearchProvider';
 import { useEffect, useState } from 'react';
 import { ProductType } from 'types/product';
 import { getProductList } from 'utils/apis';
+import { getKeywordRegex } from 'utils/getKeywordRegex';
 
 import { useFetching } from '../common/useFetching';
 import { useIntersect } from '../common/useIntersect';
 
-interface Params {
-  filterList: string[];
-}
-
-export const useProductListService = ({ filterList }: Params) => {
+export const useProductListService = () => {
+  const { filterList, handleFilterList } = useFilterWithSearchContext();
   const [page, setPage] = useState<number>(0);
   const [productList, setProductList] = useState<ProductType[]>([]);
   const [filteredProductList, setFilteredProductList] = useState<ProductType[]>([]);
@@ -52,6 +51,16 @@ export const useProductListService = ({ filterList }: Params) => {
     if (filterSet.has('onlySale')) {
       filteredProductList = filteredProductList.filter((product) => product.isSale);
     }
+    filterSet.delete('includeSoldOut');
+    filterSet.delete('onlyExclusive');
+    filterSet.delete('onlySale');
+
+    const searchKeywordList = Array.from(filterSet);
+
+    searchKeywordList.forEach((keyword) => {
+      const regex = getKeywordRegex(keyword);
+      filteredProductList = filteredProductList.filter((product) => regex.test(product.goodsName));
+    });
 
     return filteredProductList;
   };
@@ -62,8 +71,10 @@ export const useProductListService = ({ filterList }: Params) => {
   }, [productList, filterList]);
 
   return {
+    filterList,
     isLoading,
     targetRef,
     filteredProductList,
+    handleFilterList,
   };
 };

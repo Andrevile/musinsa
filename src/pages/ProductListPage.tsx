@@ -4,47 +4,38 @@ import { Container } from 'components/common/Container';
 import { SearchIcon } from 'components/common/icons/SearchIcon';
 import { LoadingSpinner } from 'components/common/LoadingSpinner';
 import PageLayout from 'components/common/PageLayout';
-import { useFilterContext } from 'components/context/FilterContextProvider';
 import Header from 'components/header';
 import { ProductCard } from 'components/product/ProductCard';
 import { ProductGrid } from 'components/product/ProductGrid';
 import { useSearch } from 'hooks/common/useSearch';
 import { useProductListService } from 'hooks/product-list/useProductListService';
-import { useState } from 'react';
 
 export default function ProductListPage() {
-  const { searchModeOnOff, toggleSearchMode } = useFilterContext();
-  const [queryList, setQueryList] = useState<string[]>([]);
-  const { targetRef, isLoading, filteredProductList } = useProductListService({ filterList: queryList });
+  const { filterList, targetRef, isLoading, filteredProductList, handleFilterList } = useProductListService();
   const {
     error,
     keyword,
     inputRef,
-    // searchModeOnOff,
-    // toggleSearchMode,
+    searchModeOnOff,
+    toggleSearchMode,
     isIncludeKeyword,
     handleChangeSearchInput,
-    onBlur,
     onSearch,
     setIsError,
   } = useSearch();
 
-  const handleQueryList = (filterList: string[]) => {
-    setQueryList(filterList);
-  };
-
-  const paddingTop = queryList.length ? '165px' : '115px';
+  const paddingTop = filterList.length ? '165px' : '115px';
 
   return (
     <PageLayout>
       <Header>
         <Header.AppBar />
-        <Header.Filter filterList={queryList} handleFilterList={handleQueryList}>
+        <Header.Filter>
           <ChipButton
             icon={<SearchIcon />}
             onToggle={toggleSearchMode}
             primary={searchModeOnOff}
-            highlight={!searchModeOnOff && isIncludeKeyword(queryList)}
+            highlight={!searchModeOnOff && isIncludeKeyword(filterList)}
           >
             검색
           </ChipButton>
@@ -54,15 +45,14 @@ export default function ProductListPage() {
             ref={inputRef}
             error={error}
             keyword={keyword}
-            onBlur={onBlur}
             onSearch={() => {
               if (keyword && keyword.length) {
-                const isExistSearchKeyWord = queryList.includes(keyword);
+                const isExistSearchKeyWord = filterList.includes(keyword);
                 if (isExistSearchKeyWord) {
                   setIsError(true);
                   return;
                 }
-                setQueryList([...queryList, keyword]);
+                handleFilterList([...filterList, keyword]);
                 onSearch();
               }
             }}

@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
-import { FilterContextProvider } from 'components/context/FilterContextProvider';
+import { FilterWithSearchContextProvider } from 'components/context/FilterWithSearchProvider';
 import ProductListPage from 'pages/ProductListPage';
 
 import { GlobalStyle } from './GlobalStyle';
@@ -22,9 +22,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <FilterContextProvider>
+      <FilterWithSearchContextProvider>
         <ProductListPage />
-      </FilterContextProvider>
+      </FilterWithSearchContextProvider>
     </ThemeProvider>
   );
 }

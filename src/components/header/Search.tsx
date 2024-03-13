@@ -51,6 +51,7 @@ export const Search = forwardRef<HTMLInputElement, Props>(({ error, keyword, onC
           }}
           placeholder='상품명 검색'
           css={css`
+            width: 100%;
             &::placeholder {
               font-size: 16px;
               font-weight: ${theme.fontWeight.regular};

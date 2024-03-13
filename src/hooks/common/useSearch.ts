@@ -25,10 +25,6 @@ export const useSearch = () => {
     setKeyword(e.target.value);
   };
 
-  const onBlur = () => {
-    setIsSearchModeOnOff(false);
-  };
-
   const onSearch = () => {
     setKeyword(null);
   };
@@ -51,7 +47,6 @@ export const useSearch = () => {
     isIncludeKeyword,
     handleChangeSearchInput,
     setIsError,
-    onBlur,
     onSearch,
   };
 };
