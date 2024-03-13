@@ -3,19 +3,17 @@ import { ChipButton } from 'components/common/ChipButton';
 import { Container } from 'components/common/Container';
 import { RefreshIcon } from 'components/common/icons/RefreshIcon';
 import { Tag } from 'components/common/Tag';
-import { useFilterWithSearchContext } from 'components/context/FilterWithSearchProvider';
 import { FILTER_OPTIONS } from 'constants/filter';
 import { useFilter } from 'hooks/common/useFilter';
 import { ReactNode } from 'react';
 import { FilterOptionType } from 'types/filter';
 
 interface Props {
-  children?: ReactNode;
+  searchSection?: ReactNode;
 }
 
-export default function Filter({ children }: Props) {
-  const { filterList, handleFilterList } = useFilterWithSearchContext();
-  const { toggleFilter, resetFilter } = useFilter({ filterList, setFilterList: handleFilterList });
+export default function Filter({ searchSection }: Props) {
+  const { filterList, toggleFilter, resetFilter } = useFilter();
 
   const selectedFilter = new Set(filterList);
 
@@ -36,7 +34,7 @@ export default function Filter({ children }: Props) {
           }
         `}
       >
-        {children}
+        {searchSection}
         {Object.entries(FILTER_OPTIONS).map(([id, value]) => (
           <ChipButton key={id} onToggle={() => toggleFilter(id)} highlight={selectedFilter.has(id)}>
             {value}

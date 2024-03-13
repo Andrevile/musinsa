@@ -30,16 +30,18 @@ export default function ProductListPage() {
     <PageLayout>
       <Header>
         <Header.AppBar />
-        <Header.Filter>
-          <ChipButton
-            icon={<SearchIcon />}
-            onToggle={toggleSearchMode}
-            primary={searchModeOnOff}
-            highlight={!searchModeOnOff && isIncludeKeyword(filterList)}
-          >
-            검색
-          </ChipButton>
-        </Header.Filter>
+        <Header.Filter
+          searchSection={
+            <ChipButton
+              icon={<SearchIcon />}
+              onToggle={toggleSearchMode}
+              primary={searchModeOnOff}
+              highlight={!searchModeOnOff && isIncludeKeyword(filterList)}
+            >
+              검색
+            </ChipButton>
+          }
+        ></Header.Filter>
         {searchModeOnOff && (
           <Header.Search
             ref={inputRef}

@@ -1,25 +1,23 @@
-interface Params {
-  filterList: string[];
-  setFilterList: (list: string[]) => void;
-}
+import { useFilterWithSearchContext } from 'components/context/FilterWithSearchProvider';
 
-export const useFilter = ({ filterList, setFilterList }: Params) => {
+export const useFilter = () => {
+  const { filterList, handleFilterList } = useFilterWithSearchContext();
   const filterSet = new Set(filterList);
 
   const toggleFilter = (filter: string) => {
     const isExist = filterSet.has(filter);
 
     if (!isExist) {
-      setFilterList([...filterList, filter]);
+      handleFilterList([...filterList, filter]);
       return;
     }
 
     filterSet.delete(filter);
-    setFilterList(Array.from(filterSet));
+    handleFilterList(Array.from(filterSet));
   };
 
   const resetFilter = () => {
-    setFilterList([]);
+    handleFilterList([]);
   };
 
   return {
