@@ -21,6 +21,7 @@ export default function ProductListPage() {
     isIncludeKeyword,
     handleChangeSearchInput,
     onSearch,
+    onBlur,
     setIsError,
   } = useSearch();
 
@@ -71,6 +72,7 @@ export default function ProductListPage() {
         `}
       >
         <Container
+          onClick={onBlur}
           css={css`
             position: relative;
             height: calc(100vh - ${paddingTop});

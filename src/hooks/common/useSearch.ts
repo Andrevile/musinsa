@@ -29,6 +29,10 @@ export const useSearch = () => {
     setKeyword(null);
   };
 
+  const onBlur = () => {
+    setIsSearchModeOnOff(false);
+  };
+
   useEffect(() => {
     if (searchModeOnOff) {
       inputRef.current?.focus();
@@ -48,5 +52,6 @@ export const useSearch = () => {
     handleChangeSearchInput,
     setIsError,
     onSearch,
+    onBlur,
   };
 };
