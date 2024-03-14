@@ -15,10 +15,16 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "components/*": ["./src/components/*"],
+      "pages/*": ["./src/pages/*"],
+      "types/*": ["./src/types/*"],
+      "constants/*": ["./src/constants/*"],
+      "utils/*": ["./src/utils/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "static/*": ["./src/static/*"]
     },
     "types": ["node", "@emotion/react/types/css-prop"]
   },
-  "include": ["src"],
+  "include": ["src", "src/types/emotions.d.ts"],
   "exclude": ["node_modules"]
 }
