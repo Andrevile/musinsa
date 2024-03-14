@@ -159,6 +159,7 @@ const reset = css`
 
   button,
   input {
+    color: #000;
     border: none;
   }
 
