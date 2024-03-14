@@ -3,11 +3,13 @@ export const debounce = <T extends (...args: any[]) => any>(callback: T, delay: 
   let timeout: ReturnType<typeof setTimeout>;
   return (...args: Parameters<T>): ReturnType<T> => {
     let result: any;
-    if (timeout) clearTimeout(timeout);
+    if (timeout) {
+      clearTimeout(timeout);
+    }
     timeout = setTimeout(() => {
       result = callback(...args);
     }, delay);
-    console.log(timeout);
+
     return result;
   };
 };
