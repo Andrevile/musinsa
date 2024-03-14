@@ -49,10 +49,15 @@ export default function Filter({ searchSection }: Props) {
             padding: 12px 15px;
           `}
         >
-          <Container>
+          <Container
+            css={css`
+              width: calc(100% - 35px);
+            `}
+          >
             <ul
               css={css`
-                width: calc(100% - 35px);
+                width: 100%;
+                list-style: none;
                 overflow-x: scroll;
                 display: inline-flex;
                 flex-wrap: nowrap;
@@ -63,7 +68,12 @@ export default function Filter({ searchSection }: Props) {
               `}
             >
               {filterList.map((item) => (
-                <li key={item}>
+                <li
+                  key={item}
+                  css={css`
+                    flex-shrink: 0;
+                  `}
+                >
                   <Tag
                     item={{ id: item, text: FILTER_OPTIONS[item as FilterOptionType] ?? item }}
                     onClose={() => toggleFilter(item)}

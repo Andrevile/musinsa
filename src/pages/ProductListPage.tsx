@@ -23,6 +23,7 @@ export default function ProductListPage() {
     toggleSearchMode,
     isIncludeKeyword,
     handleChangeSearchInput,
+    onClickAutoCompleteItem,
     onSearch,
     onBlur,
   } = useSearch();
@@ -48,7 +49,13 @@ export default function ProductListPage() {
         {searchModeOnOff && (
           <Header.Search
             ref={inputRef}
-            autoComplete={<AutoComplete keyword={keyword ?? ''} productList={filteredProductList} onClick={onSearch} />}
+            autoComplete={
+              <AutoComplete
+                keyword={keyword ?? ''}
+                productList={filteredProductList}
+                onClick={onClickAutoCompleteItem}
+              />
+            }
             error={error}
             keyword={keyword}
             onSearch={onSearch}
