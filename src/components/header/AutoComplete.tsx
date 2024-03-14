@@ -14,8 +14,10 @@ interface Props {
 export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
   const [result, setResult] = useState<ProductType[]>([]);
 
+  const trimKeyword = keyword.trim();
+
   const handleAutoCompleteResult = () => {
-    const regex = getKeywordRegex(keyword);
+    const regex = getKeywordRegex(trimKeyword);
     const result = productList.filter((product) => regex.test(product.goodsName) || regex.test(product.brandName));
     setResult(result);
   };
@@ -30,7 +32,7 @@ export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
     };
   }, [keyword]);
 
-  if (!keyword.length) {
+  if (!trimKeyword.length) {
     return null;
   }
 

@@ -24,7 +24,8 @@ export const useSearch = () => {
   };
 
   const handleChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
+    const keyword = e.target.value;
+    setKeyword(keyword.trim());
   };
 
   const onSearch = () => {
