@@ -7,7 +7,7 @@ import { AppBar } from './AppBar';
 import Filter from './Filter';
 import { Search } from './Search';
 
-export default function Header({ children }: { children: ReactNode }) {
+export function Header({ children }: { children: ReactNode }) {
   return (
     <Head>
       {children}

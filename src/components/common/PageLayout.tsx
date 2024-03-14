@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export default function PageLayout({ children }: { children?: React.ReactNode }) {
+export function PageLayout({ children }: { children?: React.ReactNode }) {
   return <Page>{children}</Page>;
 }
 
