@@ -23,7 +23,8 @@ export const useProductListService = () => {
     {
       onSuccess: (data) => {
         if (data) {
-          setProductList([...productList, ...data]);
+          const newProductList = [...productList, ...data];
+          setProductList(newProductList);
         }
       },
     },
