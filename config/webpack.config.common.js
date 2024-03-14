@@ -6,15 +6,9 @@ module.exports = {
   entry: './src/index.tsx',
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js', 'jsx'],
     alias: {
-      components: path.resolve(__dirname, '../src/components'),
-      pages: path.resolve(__dirname, '../src/pages'),
-      types: path.resolve(__dirname, '../src/types'),
-      constants: path.resolve(__dirname, '../src/constants'),
-      utils: path.resolve(__dirname, '../src/utils'),
-      hooks: path.resolve(__dirname, '../src/hooks'),
-      static: path.resolve(__dirname, '../src/static'),
+      '@': path.resolve(__dirname, '../src'),
     },
   },
 
@@ -28,7 +22,6 @@ module.exports = {
       },
       {
         test: /\.(jpg|jpeg|png|gif|ico)$/,
-        type: 'asset/resource',
         generator: {
           filename: 'static/[name][ext]',
         },
