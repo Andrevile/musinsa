@@ -17,6 +17,10 @@ export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
   const trimKeyword = keyword.trim();
 
   const handleAutoCompleteResult = () => {
+    if (!trimKeyword.length) {
+      return;
+    }
+
     const regex = getKeywordRegex(trimKeyword);
     const result = productList.filter((product) => regex.test(product.goodsName) || regex.test(product.brandName));
     setResult(result);
