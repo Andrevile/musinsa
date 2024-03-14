@@ -1,6 +1,7 @@
-import { css } from '@emotion/react';
+import { css, useTheme } from '@emotion/react';
 import { Container } from 'components/common/Container';
-import { useEffect, useState } from 'react';
+import { SearchIcon } from 'components/common/icons/SearchIcon';
+import { HTMLAttributes, useEffect, useState } from 'react';
 import { ProductType } from 'types/product';
 import { debounce } from 'utils/debounce';
 import { getKeywordRegex } from 'utils/getKeywordRegex';
@@ -8,7 +9,7 @@ import { getKeywordRegex } from 'utils/getKeywordRegex';
 interface Props {
   keyword: string;
   productList: ProductType[];
-  onClick?: () => void;
+  onClick?: (item: ProductType) => void;
 }
 
 export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
@@ -46,24 +47,69 @@ export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
         position: absolute;
         max-height: 300px;
         overflow: scroll;
-        background: green;
+        background: #ffffff;
       `}
     >
       <ul>
-        {result.map((item) => (
-          <li
-            key={item.goodsNo}
-            onClick={onClick}
-            css={css`
-              height: 40px;
-              border: 1px solid black;
-            `}
-          >
-            {item.goodsName}
-            {item.brandName}
-          </li>
+        {result.map((item, index) => (
+          <AutoCompleteItem key={index} item={item} onClick={() => onClick?.(item)} />
         ))}
       </ul>
     </Container>
   );
 };
+
+function AutoCompleteItem({ item, ...rest }: { item: ProductType } & HTMLAttributes<HTMLLIElement>) {
+  const theme = useTheme();
+
+  return (
+    <li
+      {...rest}
+      key={item.goodsNo}
+      css={css`
+        padding: 4px 10px;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        border-bottom: 1px solid ${theme.colors.lightGray};
+        text-overflow: ellipsis;
+        font-size: 9px;
+        font-weight: ${theme.fontWeight.regularBold};
+      `}
+    >
+      <span
+        css={css`
+          width: 20px;
+          height: 20px;
+          background: ${theme.colors.heavyGray};
+          border-radius: 50%;
+          margin-right: 6px;
+        `}
+      >
+        <SearchIcon size={20} />
+      </span>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+        `}
+      >
+        <span
+          css={css`
+            color: gray;
+            margin-bottom: 2px;
+          `}
+        >
+          {item.brandName}
+        </span>
+        <span
+          css={css`
+            font-size: 10px;
+          `}
+        >
+          {item.goodsName}
+        </span>
+      </div>
+    </li>
+  );
+}

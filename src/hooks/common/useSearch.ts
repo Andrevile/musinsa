@@ -1,5 +1,6 @@
 import { useFilterWithSearchContext } from 'components/context/FilterWithSearchProvider';
 import { useEffect, useRef, useState } from 'react';
+import { ProductType } from 'types/product';
 
 export const useSearch = () => {
   const { filterList, handleFilterList } = useFilterWithSearchContext();
@@ -24,8 +25,7 @@ export const useSearch = () => {
   };
 
   const handleChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const keyword = e.target.value;
-    setKeyword(keyword.trim());
+    setKeyword(e.target.value);
   };
 
   const onSearch = () => {
@@ -35,10 +35,22 @@ export const useSearch = () => {
         setIsError(true);
         return;
       }
-      handleFilterList([...filterList, keyword]);
+      handleFilterList([...filterList, keyword.trim()]);
       setIsError(false);
       setKeyword(null);
     }
+  };
+
+  const onClickAutoCompleteItem = (item: ProductType) => {
+    const productName = item.goodsName;
+    const isExistSearchKeyWord = filterList.includes(productName);
+    if (isExistSearchKeyWord) {
+      setIsError(true);
+      return;
+    }
+    handleFilterList([...filterList, productName.trim()]);
+    setIsError(false);
+    setKeyword(null);
   };
 
   const onBlur = () => {
@@ -63,6 +75,7 @@ export const useSearch = () => {
     toggleSearchMode,
     isIncludeKeyword,
     handleChangeSearchInput,
+    onClickAutoCompleteItem,
     onSearch,
     onBlur,
   };

@@ -18,7 +18,7 @@ export const ProductGrid = ({ itemList, renderItem }: Props) => {
         `}
       >
         {itemList.map((item, index) => (
-          <li key={item.goodsNo}>{renderItem(item, index)}</li>
+          <li key={index}>{renderItem(item, index)}</li>
         ))}
       </ul>
     </Container>
