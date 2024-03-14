@@ -1,5 +1,6 @@
 import { css, useTheme } from '@emotion/react';
 import { Container } from 'components/common/Container';
+import { Typography } from 'components/common/Typography';
 import { SearchIcon } from 'components/common/icons/SearchIcon';
 import { HTMLAttributes, useEffect, useState } from 'react';
 import { ProductType } from 'types/product';
@@ -52,14 +53,18 @@ export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
     >
       <ul>
         {result.map((item, index) => (
-          <AutoCompleteItem key={index} item={item} onClick={() => onClick?.(item)} />
+          <AutoCompleteItem key={index} item={item} keyword={trimKeyword} onClick={() => onClick?.(item)} />
         ))}
       </ul>
     </Container>
   );
 };
 
-function AutoCompleteItem({ item, ...rest }: { item: ProductType } & HTMLAttributes<HTMLLIElement>) {
+function AutoCompleteItem({
+  item,
+  keyword,
+  ...rest
+}: { item: ProductType; keyword: string } & HTMLAttributes<HTMLLIElement>) {
   const theme = useTheme();
 
   return (
@@ -75,6 +80,7 @@ function AutoCompleteItem({ item, ...rest }: { item: ProductType } & HTMLAttribu
         text-overflow: ellipsis;
         font-size: 9px;
         font-weight: ${theme.fontWeight.regularBold};
+        cursor: pointer;
       `}
     >
       <span
@@ -100,14 +106,14 @@ function AutoCompleteItem({ item, ...rest }: { item: ProductType } & HTMLAttribu
             margin-bottom: 2px;
           `}
         >
-          {item.brandName}
+          <Typography.Highlight text={item.brandName} keyword={keyword} />
         </span>
         <span
           css={css`
             font-size: 10px;
           `}
         >
-          {item.goodsName}
+          <Typography.Highlight text={item.goodsName} keyword={keyword} />
         </span>
       </div>
     </li>
