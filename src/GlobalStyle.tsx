@@ -165,6 +165,7 @@ const reset = css`
 
   input {
     outline: none;
+    font-size: 16px;
   }
 
   button {
