@@ -28,7 +28,7 @@ export const AutoComplete = ({ keyword, productList, onClick }: Props) => {
 
   useEffect(() => {
     let autoComplete;
-    autoComplete = debounce(handleAutoCompleteResult, 500);
+    autoComplete = debounce(handleAutoCompleteResult, 400);
     autoComplete();
 
     return () => {
