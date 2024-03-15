@@ -1,6 +1,4 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Container } from 'components/common/Container';
 import { ReactNode } from 'react';
 
 import { AppBar } from './AppBar';
@@ -8,17 +6,7 @@ import Filter from './Filter';
 import { Search } from './Search';
 
 export function Header({ children }: { children: ReactNode }) {
-  return (
-    <Head>
-      {children}
-      <Container
-        css={css`
-          height: 10px;
-          background: #f1f1f1;
-        `}
-      />
-    </Head>
-  );
+  return <Head>{children}</Head>;
 }
 
 Header.AppBar = AppBar;

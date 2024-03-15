@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { ChipButton } from 'components/common/ChipButton';
 import { Container } from 'components/common/Container';
 import { Empty } from 'components/common/Empty';
@@ -28,7 +29,8 @@ export default function ProductListPage() {
     onBlur,
   } = useSearch();
 
-  const paddingTop = filterList.length ? '165px' : '115px';
+  let paddingTop = filterList.length ? 155 : 105;
+  paddingTop = searchModeOnOff ? paddingTop + 80 : paddingTop;
 
   return (
     <PageLayout>
@@ -68,7 +70,7 @@ export default function ProductListPage() {
         css={css`
           position: relative;
           height: 100%;
-          padding-top: ${paddingTop};
+          padding-top: ${paddingTop}px;
         `}
       >
         {!filteredProductList.length && filterList.length ? (
@@ -77,7 +79,7 @@ export default function ProductListPage() {
           <Container
             css={css`
               position: relative;
-              height: calc(100vh - ${paddingTop});
+              height: calc(100vh - ${paddingTop}px);
               overflow-x: hidden;
               overflow-y: scroll;
               ::-webkit-scrollbar {
@@ -85,6 +87,7 @@ export default function ProductListPage() {
               }
             `}
           >
+            <Divider />
             <ProductGrid itemList={filteredProductList} renderItem={(item) => <ProductCard product={item} />} />
             {isLoading && (
               <span
@@ -115,3 +118,8 @@ export default function ProductListPage() {
     </PageLayout>
   );
 }
+
+const Divider = styled(Container)`
+  height: 10px;
+  background: #f1f1f1;
+`;
